@@ -1,9 +1,12 @@
+# Python code for the two neurons experiment
+
+# Imports
 import serial
 import time
 import numpy as np
 
+# Creation of the serial interface
 ser = serial.Serial('/dev/tty.usbmodemfa131', 38400)
-
 time.sleep(1)
 
 # Send a list of spikes and blink at each spike 
@@ -34,7 +37,7 @@ def send_list(input_spikes,output_spikes,dec_factor):
 			print "Output spike at time", t
 			ser.write('2')
 
-# Test the stuff
+# Test the code with results from PyNN
 
 # Import results from pyNN
 raw_list = np.genfromtxt("Results/spikes.dat")
@@ -45,4 +48,5 @@ for i in raw_list:
 
 input_spikes = np.genfromtxt("Results/input_spikes.dat")
 
+# Send the list, deccelerate factor of 10
 send_list(input_spikes,output_spikes,10)
